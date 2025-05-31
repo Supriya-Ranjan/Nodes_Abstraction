@@ -16,6 +16,10 @@ export const BaseNode = ({
     [FIELD_VALUES.INPUT_NAME]: () => id.replace(defaultFieldsValue?.prev, defaultFieldsValue?.curr),
     [FIELD_VALUES.INPUT_TYPE]: () => 'Text',
     [FIELD_VALUES.TEXT]: () => '{{input}}',
+    [FIELD_VALUES.URL]: () => 'https://vectorshift.ai',
+    [FIELD_VALUES.CONDITION]: () => 'None',
+    [FIELD_VALUES.ENDPOINT]: () => '/example',
+    [FIELD_VALUES.EXPRESSION]: () => 'a+b',
   };
 
   const initialState = fields.reduce((acc, field) => {
@@ -39,38 +43,21 @@ export const BaseNode = ({
   };
 
   return (
-    <div
-      style={{
-        width: 220,
-        minHeight: 100,
-        padding: 10,
-        border: '1px solid #333',
-        borderRadius: 8,
-        background: '#1C2536',
-        color: 'white',
-        fontSize: 13,
-      }}
-    >
+    <div className='node'>
       {/* Title */}
-      <div style={{ fontWeight: 'bold', marginBottom: 8 }}>{title}</div>
+      <div className='node-title'>{title}</div>
 
       {/* Form Fields */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div className='node-fields'>
         {fields.map((field) => {
           if (field.type === FIELD_TYPES.SELECT) {
             return (
-              <label key={field.key} style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}>
-                <span style={{ fontWeight: 'bold', marginBottom: '4px' }}>{field.label}:</span>
+              <label key={field.key} className='node-select-box'>
+                <span className='node-select-title'>{field.label}:</span>
                 <select
                   value={state[field.key] || ''}
                   onChange={(e) => handleChange(field.key, e.target.value)}
-                  style={{
-                    padding: '6px 10px',
-                    borderRadius: '6px',
-                    border: '1px solid #ccc',
-                    backgroundColor: '#f9f9f9',
-                    fontSize: '14px',
-                  }}
+                  className='node-select'
                 >
                   {field.options.map((opt) => (
                     <option key={opt.key} value={opt.value}>
@@ -90,14 +77,7 @@ export const BaseNode = ({
                 type={field.type}
                 value={state[field.key] || ''}
                 onChange={(e) => handleChange(field.key, e.target.value)}
-                style={{
-                  marginLeft: '6px',
-                  padding: '6px 10px',
-                  borderRadius: '6px',
-                  border: '1px solid #ccc',
-                  backgroundColor: '#f9f9f9',
-                  fontSize: '12px',
-                }}
+                className='node-text'
               /> : null}
             </label>
           );

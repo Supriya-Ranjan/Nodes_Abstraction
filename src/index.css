@@ -12,6 +12,56 @@ code {
     monospace;
 }
 
+.node {
+  width: 220px;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1C2536;
+  color: white;
+  font-size: 13px;
+}
+
+.node-title {
+  font-weight: 'bold';
+  margin-bottom: 8;
+}
+
+.node-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.node-select-box {
+  display: 'flex';
+  flex-direction: 'column';
+  margin-bottom: '12px';
+}
+
+.node-select-title {
+  font-weight: 'bold';
+  margin-bottom: '4px';
+}
+
+.node-select {
+  padding: '6px 10px';
+  border-radius: '6px';
+  border: '1px solid #ccc';
+  background-color: '#f9f9f9';
+  font-size: '14px';
+}
+
+.node-text {
+  margin-left: '6px';
+  padding: '6px 10px';
+  border-radius: '6px';
+  border: '1px solid #ccc';
+  background-color: '#f9f9f9';
+  font-size: '12px';
+}
+
 .handle {
   background: '#555'
 }

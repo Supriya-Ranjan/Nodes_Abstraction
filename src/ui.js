@@ -6,10 +6,6 @@ import { useState, useRef, useCallback } from 'react';
 import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
-// import { InputNode } from './nodes/inputNode';
-// import { LLMNode } from './nodes/llmNode';
-// import { OutputNode } from './nodes/outputNode';
-// import { TextNode } from './nodes/textNode';
 import { BaseNode } from './nodes/baseNode';
 
 import 'reactflow/dist/style.css';
@@ -17,12 +13,6 @@ import { NODE_CONFIGS } from './enum/nodes';
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
-// const nodeTypes = {
-//   customInput: InputNode,
-//   llm: LLMNode,
-//   customOutput: OutputNode,
-//   text: TextNode,
-// };
 
 const nodeTypes = Object.fromEntries(
   Object.entries(NODE_CONFIGS).map(([key, config]) => [
@@ -32,7 +22,7 @@ const nodeTypes = Object.fromEntries(
         {...props}
         title={config.title}
         fields={config.fields}
-        handles={config.handle}
+        handles={config.handles}
         defaultFieldsValue={config.defaultFieldsValue}
       />
     ),
