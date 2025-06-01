@@ -53,6 +53,13 @@ code {
   font-size: '14px';
 }
 
+.node-text-container {
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  margin-top: 5px;
+}
+
 textarea.node-text {
   width: '100%' !important;
   min-height: '60px' !important;

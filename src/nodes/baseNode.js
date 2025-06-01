@@ -9,7 +9,7 @@ const isValidVariable = (name) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(name);
 export const BaseNode = ({
   id,
   data,
-  key,
+  nodeKey = 'nodeKey',
   title = 'Untitled',
   fields = [],
   handles = [],
@@ -31,8 +31,6 @@ export const BaseNode = ({
     acc[field.key] = data?.[field.key] ?? (fallback ? fallback() : '');
     return acc;
   }, {});
-  console.log(variables);
-
 
   const [state, setState] = useState(initialState);
 
@@ -57,9 +55,7 @@ export const BaseNode = ({
   };
 
   useEffect(() => {
-    // You can sync to global store or backend if needed
-    // console.log('Updated node state:', state);
-    if (fields.key === FIELD_VALUES.TEXT && key === NODE_TYPES.TEXT_NODES) {
+    if (nodeKey === NODE_TYPES.TEXT_NODES) {
       const vars = extractVariables();
       setVariables(vars);
       resizeTextarea();
@@ -102,7 +98,7 @@ export const BaseNode = ({
 
           // For text/number/etc. fields
           return (
-            <label key={field.key}>
+            <label className='node-text-container' key={field.key}>
               {field.label}:
               {field.type ? <textarea
                 ref={textareaRef}
@@ -110,8 +106,7 @@ export const BaseNode = ({
                 value={state[field.key] || ''}
                 onChange={(e) => {
                   handleChange(field.key, e.target.value);
-                  if (key === NODE_TYPES.TEXT_NODES) {
-                    console.log(key);
+                  if (nodeKey === NODE_TYPES.TEXT_NODES) {
                     resizeTextarea();
                   }
                 }}

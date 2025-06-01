@@ -17,16 +17,18 @@ const proOptions = { hideAttribution: true };
 const nodeTypes = Object.fromEntries(
   Object.entries(NODE_CONFIGS).map(([key, config]) => [
     key,
-    (props) => (
-      <BaseNode
-        {...props}
-        key={config.key}
-        title={config.title}
-        fields={config.fields}
-        handles={config.handles}
-        defaultFieldsValue={config.defaultFieldsValue}
-      />
-    ),
+    (props) => {
+      return (
+        <BaseNode
+          {...props}
+          nodeKey={config.key}
+          title={config.title}
+          fields={config.fields}
+          handles={config.handles}
+          defaultFieldsValue={config.defaultFieldsValue}
+        />
+      );
+    },
   ])
 );
 
