@@ -1,5 +1,5 @@
 // /src/nodes/baseNode.js
-
+import PropTypes from "prop-types";
 import { useState, useEffect, useRef } from 'react';
 import { Handle, Position } from 'reactflow';
 import { FIELD_TYPES, FIELD_VALUES, NODE_TYPES } from '../enum/nodes';
@@ -143,4 +143,14 @@ export const BaseNode = ({
       ))}
     </div>
   );
+};
+
+BaseNode.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  data: PropTypes.object,
+  nodeKey: PropTypes.string,
+  title: PropTypes.string,
+  fields: PropTypes.array,
+  handles: PropTypes.array,
+  defaultFieldsValue: PropTypes.object,
 };
