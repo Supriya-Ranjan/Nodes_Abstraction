@@ -53,13 +53,14 @@ code {
   font-size: '14px';
 }
 
-.node-text {
-  margin-left: '6px';
-  padding: '6px 10px';
-  border-radius: '6px';
-  border: '1px solid #ccc';
-  background-color: '#f9f9f9';
-  font-size: '12px';
+textarea.node-text {
+  width: '100%' !important;
+  min-height: '60px' !important;
+  overflow: 'hidden' !important;
+  resize: 'none' !important;
+  padding: '6px' !important;
+  font-size: '13px' !important;
+  border-radius: '6px' !important;
 }
 
 .handle {

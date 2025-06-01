@@ -20,6 +20,7 @@ const nodeTypes = Object.fromEntries(
     (props) => (
       <BaseNode
         {...props}
+        key={config.key}
         title={config.title}
         fields={config.fields}
         handles={config.handles}

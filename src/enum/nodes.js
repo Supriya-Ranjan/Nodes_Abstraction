@@ -29,6 +29,7 @@ export const NODE_TYPES = {
 
 export const NODE_CONFIGS = {
     [NODE_TYPES.INPUT]: {
+        key: NODE_TYPES.INPUT,
         title: "Input",
         fields: [
             { label: "Name", type: FIELD_TYPES.TEXT, key: FIELD_VALUES.INPUT_NAME },
@@ -47,6 +48,7 @@ export const NODE_CONFIGS = {
         }
     },
     [NODE_TYPES.OUTPUT]: {
+        key: NODE_TYPES.OUTPUT,
         title: "Output",
         fields: [
             { label: "Name", type: FIELD_TYPES.TEXT, key: FIELD_VALUES.INPUT_NAME },
@@ -65,6 +67,7 @@ export const NODE_CONFIGS = {
         }
     },
     [NODE_TYPES.TEXT_NODES]: {
+        key: NODE_TYPES.TEXT_NODES,
         title: "Text",
         fields: [
             { label: "Text", type: FIELD_TYPES.TEXT, key: FIELD_VALUES.TEXT }
@@ -73,6 +76,7 @@ export const NODE_CONFIGS = {
             { id: "output", type: "source", position: "Right" }],
     },
     [NODE_TYPES.LLM_NODES]: {
+        key: NODE_TYPES.LLM_NODES,
         title: "LLM",
         fields: [
             { label: "This is a LLM" }
@@ -84,6 +88,7 @@ export const NODE_CONFIGS = {
         ]
     },
     [NODE_TYPES.DATA]: {
+        key: NODE_TYPES.DATA,
         title: "Data Source",
         fields: [
             { label: "URL", type: FIELD_TYPES.TEXT, key: FIELD_VALUES.URL },
@@ -103,6 +108,7 @@ export const NODE_CONFIGS = {
     },
 
     [NODE_TYPES.DECISION]: {
+        key: NODE_TYPES.DECISION,
         title: "Decision",
         fields: [
             { label: "Condition", type: FIELD_TYPES.TEXT, key: FIELD_VALUES.CONDITION }
@@ -115,6 +121,7 @@ export const NODE_CONFIGS = {
     },
 
     [NODE_TYPES.LOGGER]: {
+        key: NODE_TYPES.LOGGER,
         title: "Logger",
         fields: [
             {
@@ -135,6 +142,7 @@ export const NODE_CONFIGS = {
     },
 
     [NODE_TYPES.API]: {
+        key: NODE_TYPES.API,
         title: "API Call",
         fields: [
             { label: "Endpoint", type: FIELD_TYPES.TEXT, key: FIELD_VALUES.ENDPOINT },
@@ -155,6 +163,7 @@ export const NODE_CONFIGS = {
     },
 
     [NODE_TYPES.TRANSFORM]: {
+        key: NODE_TYPES.TRANSFORM,
         title: "Transformer",
         fields: [
             { label: "Expression", type: FIELD_TYPES.TEXT, key: FIELD_VALUES.EXPRESSION }

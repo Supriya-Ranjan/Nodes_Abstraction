@@ -1,12 +1,15 @@
 // /src/nodes/baseNode.js
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Handle, Position } from 'reactflow';
-import { FIELD_TYPES, FIELD_VALUES } from '../enum/nodes';
+import { FIELD_TYPES, FIELD_VALUES, NODE_TYPES } from '../enum/nodes';
+
+const isValidVariable = (name) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(name);
 
 export const BaseNode = ({
   id,
   data,
+  key,
   title = 'Untitled',
   fields = [],
   handles = [],
@@ -22,17 +25,45 @@ export const BaseNode = ({
     [FIELD_VALUES.EXPRESSION]: () => 'a+b',
   };
 
+  const [variables, setVariables] = useState([]);
   const initialState = fields.reduce((acc, field) => {
     const fallback = defaultFieldValues[field.key];
     acc[field.key] = data?.[field.key] ?? (fallback ? fallback() : '');
     return acc;
   }, {});
+  console.log(variables);
+
 
   const [state, setState] = useState(initialState);
+
+  const textareaRef = useRef(null);
+
+  const resizeTextarea = () => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+  };
+
+  // Extract variables from double curly braces and validate them
+  const extractVariables = () => {
+    console.log(state.text);
+
+    const matches = Array.from(state?.text.matchAll(/\{\{(.*?)\}\}/g));
+    return matches
+      .map((match) => match[1].trim())
+      .filter(isValidVariable);
+  };
 
   useEffect(() => {
     // You can sync to global store or backend if needed
     // console.log('Updated node state:', state);
+    if (fields.key === FIELD_VALUES.TEXT && key === NODE_TYPES.TEXT_NODES) {
+      const vars = extractVariables();
+      setVariables(vars);
+      resizeTextarea();
+    }
   }, [state]);
 
   const handleChange = (key, value) => {
@@ -73,10 +104,17 @@ export const BaseNode = ({
           return (
             <label key={field.key}>
               {field.label}:
-              {field.type ? <input
+              {field.type ? <textarea
+                ref={textareaRef}
                 type={field.type}
                 value={state[field.key] || ''}
-                onChange={(e) => handleChange(field.key, e.target.value)}
+                onChange={(e) => {
+                  handleChange(field.key, e.target.value);
+                  if (key === NODE_TYPES.TEXT_NODES) {
+                    console.log(key);
+                    resizeTextarea();
+                  }
+                }}
                 className='node-text'
               /> : null}
             </label>
@@ -92,6 +130,20 @@ export const BaseNode = ({
           position={Position[handle.position]}
           id={`${id}-${handle.id}`}
           className={`handle ${handle.className || ''}`}
+        />
+      ))}
+
+      {/* Dynamically created left-side input handles for each variable */}
+      {variables.map((variable, index) => (
+        <Handle
+          key={variable}
+          type="target"
+          position={Position.Left}
+          id={`${id}-var-${variable}`}
+          style={{
+            top: `${(index + 1) * 25}px`,
+            background: '#555',
+          }}
         />
       ))}
     </div>
